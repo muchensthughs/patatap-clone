@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Patatap Circles</title>
+	<link rel="stylesheet" type="text/css" href="assets/css/circle.css">
+	<script type="text/javascript" src="assets/js/paper-full.min.js"></script>
+	<script type="text/javascript" src="assets/js/howler.min.js"></script>
+	<script type="text/paperscript" canvas="myCanvas">
+		var keyData = {
+			a: {
+				color: "#ed3838",
+				sound: new Howl({
+					src: ['assets/G_sounds/bubbles.mp3']
+				})
+			},
+			b: {
+				color: "#ed5c38",
+				sound: new Howl({
+					src: ['assets/G_sounds/clay.mp3']
+				})
+			},
+			c: {
+				color: "#ed8338",
+				sound: new Howl({
+					src: ['assets/G_sounds/confetti.mp3']
+				})
+			},
+			d: {
+				color: "#edad38",
+				sound: new Howl({
+					src: ['assets/G_sounds/dotted-spiral.mp3']
+				})
+			},
+			e: {
+				color: "#eddd38",
+				sound: new Howl({
+					src: ['assets/G_sounds/flash-1.mp3']
+				})
+			},
+			f: {
+				color: "#d4ed38",
+				sound: new Howl({
+					src: ['assets/G_sounds/flash-2.mp3']
+				})
+			},
+			g: {
+				color: "#9bed38",
+				sound: new Howl({
+					src: ['assets/G_sounds/flash-3.mp3']
+				})
+			},
+			h: {
+				color: "#3eed38",
+				sound: new Howl({
+					src: ['assets/G_sounds/glimmer.mp3']
+				})
+			},
+			i: {
+				color: "#38ed89",
+				sound: new Howl({
+					src: ['assets/G_sounds/moon.mp3']
+				})
+			},
+			j: {
+				color: "#38edce",
+				sound: new Howl({
+					src: ['assets/G_sounds/pinwheel.mp3']
+				})
+			},
+			k: {
+				color: "#38ceed",
+				sound: new Howl({
+					src: ['assets/G_sounds/piston-1.mp3']
+				})
+			},
+			l: {
+				color: "#3895ed",
+				sound: new Howl({
+					src: ['assets/G_sounds/piston-2.mp3']
+				})
+			},
+			m: {
+				color: "#385fed",
+				sound: new Howl({
+					src: ['assets/G_sounds/piston-3.mp3']
+				})
+			},
+			n: {
+				color: "#5c38ed",
+				sound: new Howl({
+					src: ['assets/G_sounds/prism-1.mp3']
+				})
+			},
+			o: {
+				color: "#9838ed",
+				sound: new Howl({
+					src: ['assets/G_sounds/prism-2.mp3']
+				})
+			},
+			p: {
+				color: "#d738ed",
+				sound: new Howl({
+					src: ['assets/G_sounds/prism-3.mp3']
+				})
+			},
+			q: {
+				color: "#ed38bc",
+				sound: new Howl({
+					src: ['assets/G_sounds/splits.mp3']
+				})
+			},
+			r: {
+				color: "#a37539",
+				sound: new Howl({
+					src: ['assets/G_sounds/squiggle.mp3']
+				})
+			},
+			s: {
+				color: "#9aa238",
+				sound: new Howl({
+					src: ['assets/G_sounds/strike.mp3']
+				})
+			},
+			t: {
+				color: "#58842e",
+				sound: new Howl({
+					src: ['assets/G_sounds/suspension.mp3']
+				})
+			},
+			u: {
+				color: "#2e8464",
+				sound: new Howl({
+					src: ['assets/G_sounds/timer.mp3']
+				})
+			},
+			v: {
+				color: "#2e5e84",
+				sound: new Howl({
+					src: ['assets/G_sounds/ufo.mp3']
+				})
+			},
+			w: {
+				color: "#9758a0",
+				sound: new Howl({
+					src: ['assets/G_sounds/veil.mp3']
+				})
+			},
+			x: {
+				color: "#a05876",
+				sound: new Howl({
+					src: ['assets/G_sounds/wipe.mp3']
+				})
+			},
+			y: {
+				color: "#7f3022",
+				sound: new Howl({
+					src: ['assets/G_sounds/zig-zag.mp3']
+				})
+			},
+			z: {
+				color: "#21787f",
+				sound: new Howl({
+					src: ['assets/G_sounds/glimmer.mp3']
+				})
+			}
+
+		}
+
+		var circleArr = [];
+	
+		function onKeyDown(event) {
+			if (keyData[event.key]) {
+				keyData[event.key].sound.play();
+				var maxPoint = new Point(view.size.width, view.size.height);
+				var randomPoint = Point.random();
+				var point = maxPoint * randomPoint;
+				var circle = new Path.Circle(point, 300);
+				circle.strokeColor = keyData[event.key].color;
+				circle.strokeWidth = 10;
+				circleArr.push(circle);
+			}
+			
+		}
+
+		function onFrame(event) { 
+			for (var i = 0; i < circleArr.length; i++) {
+				circleArr[i].strokeColor.hue += 1;
+				circleArr[i].scale(0.9);
+				if(circleArr[i].area < 1){
+      			circleArr[i].remove(); // remove the circle from the canvas
+      			circleArr.splice(i, 1); // remove the circle from the array
+      			console.log(circleArr);
+    }
+			}
+		}
+	</script>
+</head>
+<body>
+	<canvas id="myCanvas" resize></canvas>
+</body>
+</html>
