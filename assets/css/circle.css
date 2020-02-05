@@ -8,3 +8,22 @@ body, html{
 	height: 100%;
 	margin: 0;
 }
+
+#canvas-wrap {
+	position: relative;
+	height: 100%;
+	width: 100%;
+}
+
+#overlay {
+	position: absolute;
+	top: 100px;
+	left: 0;
+	right: 0;
+	width: 280px;
+	margin: 0 auto;
+	color: white;
+	background-color: gray;
+	padding: 3px 10px;
+	border-radius: 10px;
+}
